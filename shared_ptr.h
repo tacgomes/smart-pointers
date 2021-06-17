@@ -11,7 +11,7 @@ class shared_ptr {
 public:
     shared_ptr() noexcept = default;
 
-    shared_ptr(T* data)
+    explicit shared_ptr(T* data)
         : data_(data) {
         if (data_) {
             cblock_ = new cblock();
@@ -35,7 +35,7 @@ public:
         }
     }
 
-    shared_ptr(const weak_ptr<T>& wp) noexcept
+    explicit shared_ptr(const weak_ptr<T>& wp) noexcept
         : data_(wp.data_)
         , cblock_(wp.cblock_) {
         if (cblock_) {
