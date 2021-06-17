@@ -1,7 +1,7 @@
 Smart Pointer Implementation
 ============================
 
-A _unique_ptr, _shared_ptr_ and _weak_ptr_ simple implementations.
+A `unique_ptr`, `shared_ptr` and `weak_ptr` simple implementation.
 
 See also:
 
