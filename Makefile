@@ -6,3 +6,6 @@ main: main.cpp
 
 test: main
 	valgrind --leak-check=full ./main
+
+clean:
+	rm -f main
