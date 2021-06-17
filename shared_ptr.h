@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <cassert>
 
 #include "cblock.h"
 
@@ -73,6 +74,7 @@ public:
     }
 
     T& operator*() const noexcept {
+        assert(*this);
         return *data_;
     }
 
