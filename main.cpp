@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <iostream>
 #include <cassert>
 
 #include "shared_ptr.h"
