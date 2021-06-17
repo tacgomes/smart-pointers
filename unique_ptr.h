@@ -1,7 +1,7 @@
+#pragma once
+
 #include <algorithm>
 #include <cassert>
-
-#pragma once
 
 template <class T>
 class unique_ptr {

@@ -1,8 +1,9 @@
+#pragma once
+
 #include <algorithm>
 
 #include "cblock.h"
 
-#pragma once
 
 template <class T>
 class weak_ptr {
