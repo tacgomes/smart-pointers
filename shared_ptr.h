@@ -88,6 +88,12 @@ public:
         cblock_ = nullptr;
     }
 
+    void reset(T *data) {
+        dec_shared_count();
+        data_ = data;
+        cblock_ = new cblock();
+    }
+
 private:
     void swap(shared_ptr& sp) noexcept {
         using std::swap;

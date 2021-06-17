@@ -55,7 +55,7 @@ public:
         return tmp;
     }
 
-    void reset(T* data) noexcept {
+    void reset(T* data = nullptr) noexcept {
         delete data_;
         data_ = data;
     }

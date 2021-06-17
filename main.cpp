@@ -31,6 +31,7 @@ void test_unique_ptr() {
         unique_ptr<int> up1(new int(1));
         up1.reset(new int(2));
         assert(*up1 == 2);
+        up1.reset();
     }
 
     {
@@ -101,6 +102,15 @@ void test_shared_ptr() {
     }
 
     {
+        shared_ptr<int> sp1 (new int(1));
+        sp1.reset(new int(2));
+        assert(*sp1 == 2);
+        sp1.reset();
+        assert(sp1.get() == nullptr);
+        assert(!sp1);
+    }
+
+    {
         class Base {};
         class Derived : public Base {};
         shared_ptr<Derived> sp1(new Derived);
@@ -112,6 +122,7 @@ void test_weak_ptr() {
     {
         weak_ptr<int> wp1;
         assert(!wp1.lock());
+        assert(wp1.expired());
     }
 
     {
@@ -119,7 +130,7 @@ void test_weak_ptr() {
         weak_ptr<int> wp1(sp1);
         assert(wp1.lock());
         wp1.reset();
-        assert(!wp1.lock());
+        assert(wp1.expired());
     }
 
     {
@@ -134,7 +145,7 @@ void test_weak_ptr() {
         shared_ptr<int> sp1(new int(1));
         weak_ptr<int> wp1(sp1);
         weak_ptr<int> wp2(std::move(wp1));
-        assert(!wp1.lock());
+        assert(wp1.expired());
         assert(wp2.lock());
     }
 
@@ -159,10 +170,10 @@ void test_weak_ptr() {
         weak_ptr<int> wp2(sp1);
         weak_ptr<int> wp3;
         wp3 = std::move(wp1);
-        assert(!wp1.lock());
+        assert(wp1.expired());
         assert(wp3.lock());
         wp3 = std::move(wp2);
-        assert(!wp2.lock());
+        assert(wp2.expired());
         assert(wp3.lock());
     }
 
@@ -175,6 +186,7 @@ void test_weak_ptr() {
         }
         sp1.reset();
         assert(!wp.lock());
+        assert(wp.expired());
     }
 }
 

@@ -48,9 +48,11 @@ public:
     }
 
     shared_ptr<T> lock() const {
-        return (data_ && cblock_->shared_count > 0)
-            ? shared_ptr<T>(*this)
-            : shared_ptr<T>(nullptr);
+        return expired() ? shared_ptr<T>(nullptr) : shared_ptr<T>(*this);
+    }
+
+    bool expired() const noexcept {
+        return !cblock_ || cblock_->shared_count <= 0;
     }
 
     void reset() noexcept {
