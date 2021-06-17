@@ -58,26 +58,22 @@ public:
         return *this;
     }
 
-   shared_ptr& operator=(shared_ptr&& sp) noexcept {
-       swap(sp);
-       sp.reset();
-       return *this;
-   }
-
-    const T& operator*() const noexcept {
-        return *data_;
+    shared_ptr& operator=(shared_ptr&& sp) noexcept {
+        swap(sp);
+        sp.reset();
+        return *this;
     }
 
-    T& operator*() noexcept {
-        return *data_;
-    }
-
-    const T* operator->() const noexcept {
+    T* get() const noexcept {
         return data_;
     }
 
-    T* operator->() noexcept {
+    T* operator->() const noexcept {
         return data_;
+    }
+
+    T& operator*() const noexcept {
+        return *data_;
     }
 
     explicit operator bool() const noexcept {
